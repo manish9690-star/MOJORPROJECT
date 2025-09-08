@@ -139,5 +139,5 @@ app.use((err, req, res, next) => {
 //post review
 
 app.listen(8080, () => {
-    console.log("Server started at http://localhost:8080");
+    console.log("Server started at port 8080");
 });
