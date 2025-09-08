@@ -1,0 +1,111 @@
+<% layout("/layouts/boilerplate")%>
+
+<body>
+
+<!-- Top Icons Section -->
+<div class="d-flex justify-content-start align-items-center flex-wrap my-3 gap-4 ps-3">
+  <div class="text-center">
+    <i class="bi bi-fire fs-3"></i>
+    <div>Trending</div>
+  </div>
+  <div class="text-center">
+    <i class="bi bi-door-closed fs-3"></i>
+    <div>Rooms</div>
+  </div>
+  <div class="text-center">
+    <i class="bi bi-buildings fs-3"></i>
+    <div>Iconic Cities</div>
+  </div>
+  <div class="text-center">
+    <i class="bi bi-triangle fs-3"></i>
+    <div>Mountains</div>
+  </div>
+  <div class="text-center">
+    <i class="bi bi-hospital fs-3"></i>
+    <div>Castles</div>
+  </div>
+  <div class="text-center">
+    <i class="bi bi-water fs-3"></i>
+    <div>Amazing Pools</div>
+  </div>
+  <div class="text-center">
+    <i class="bi bi-tent fs-3"></i>
+    <div>Camping</div>
+  </div>
+  <div class="text-center">
+    <i class="bi bi-truck fs-3"></i>
+    <div>Farms</div>
+  </div>
+  <div class="text-center">
+    <i class="bi bi-snow fs-3"></i>
+    <div>Arctic</div>
+  </div>
+  <div class="text-center">
+    <i class="bi bi-tsunami fs-3"></i>
+    <div>Boats</div>
+  </div>
+</div>
+
+<!-- Toggle Button Section -->
+<div class="d-flex justify-content-end align-items-center px-3 mb-4">
+  <label class="me-2 fw-semibold">Display total after taxes</label>
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" id="gstToggle">
+  </div>
+</div>
+
+<!-- Listings Section -->
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+  <% for (let listing of allListings) { %>
+    <a href="/listings/<%= listing._id %>" class="listing-link">
+      <div class="card col mb-4 listing-card shadow-sm">
+        <img 
+          src="<%= listing.image.url %>" 
+          class="card-img-top rounded" 
+          alt="listing_image" 
+          style="height: 20rem; object-fit: cover;" 
+        />
+        
+        <div class="card-body">
+          <p class="card-text mb-1">
+            <b><%= listing.title %></b>
+          </p>
+          <p class="text-muted mb-0">
+            &#8377; 
+            <span class="price" data-price="<%= listing.price %>">
+              <%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %>
+            </span> / night
+            <span class="gst-label text-success small d-none">(incl. 18% GST)</span>
+          </p>
+        </div>
+      </div>
+    </a>
+  <% } %>
+</div>
+
+<!-- JS for GST Toggle -->
+<script>
+  const toggle = document.getElementById("gstToggle");
+  const prices = document.querySelectorAll(".price");
+
+  toggle.addEventListener("change", () => {
+    prices.forEach(span => {
+      const basePrice = parseFloat(span.getAttribute("data-price")) || 0;
+      const gstLabel = span.parentElement.querySelector(".gst-label");
+
+      if (toggle.checked) {
+        // Add 18% GST
+        const gstPrice = basePrice + (basePrice * 0.18);
+        span.textContent = gstPrice.toLocaleString("en-IN");
+        gstLabel.classList.remove("d-none");
+      } else {
+        // Show original price
+        span.textContent = basePrice.toLocaleString("en-IN");
+        gstLabel.classList.add("d-none");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

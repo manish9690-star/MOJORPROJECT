@@ -1,0 +1,61 @@
+<% layout("/layouts/boilerplate")%>
+
+  <div class="row">
+    <div class="col-8 offset-2">
+      <form method="POST" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data">
+        <h3>Create a New Listing</h3>
+
+        <!-- Title -->
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" name="listing[title]" placeholder="Add a catchy title"
+            required>
+          <div class="valid-feedback">Title looks good!</div>
+          <div class="invalid-feedback">Please enter a title.</div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" name="listing[description]" rows="3" required></textarea>
+          <div class="invalid-feedback">Please enter a description.</div>
+        </div>
+
+        <!-- Location -->
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input type="text" class="form-control" id="location" name="listing[location]" placeholder="Enter location"
+            required>
+          <div class="invalid-feedback">Please enter a location.</div>
+        </div>
+
+        <!-- Country -->
+        <div class="mb-3">
+          <label for="country" class="form-label">Country</label>
+          <input type="text" class="form-control" id="country" name="listing[country]" placeholder="Enter country"
+            required>
+          <div class="invalid-feedback">Please enter a country.</div>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+          <label for="price" class="form-label">Price</label>
+          <input class="form-control" id="price" name="listing[price]" placeholder="Enter price" required>
+          <div class="invalid-feedback">Please enter a valid price.</div>
+        </div>
+
+        <!-- Image -->
+        <div class="mb-3">
+          <label for="image" class="form-label">Uplopad Listing Image</label>
+          <input type="file" class="form-control" id="image" name="listing[image]"
+           required>
+          <div class="invalid-feedback">Please provide a valid image URL.</div>
+        </div>
+
+        <!-- Submit -->
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Create Listing</button>
+        </div>
+      </form>
+    </div>
+  </div>
