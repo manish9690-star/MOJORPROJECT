@@ -121,7 +121,9 @@ app.use("/", userRouter);
 
 
 
-
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 
 
@@ -138,6 +140,7 @@ app.use((err, req, res, next) => {
 // Catch-all for undefined routes
 //post review
 
-app.listen(8080, () => {
-    console.log("Server started at port 8080");
+const port = process.env.PORT || 8000;
+app.listen(port, () => {
+    console.log(`Server started at port ${port}`);
 });
